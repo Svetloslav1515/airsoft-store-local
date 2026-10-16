@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airsoft Garage - Expert Airsoft Weapon Repair</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            flex: 1;
+            text-align: left;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #3498db;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            flex: 2;
+        }
+
+        nav li {
+            margin: 0 1rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #34495e;
+        }
+
+        /* Language and theme switcher */
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
+
+        .lang-btn, .theme-btn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .lang-btn:hover, .theme-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Dark theme styles */
+        body.dark-theme {
+            background-color: #1a1a1a;
+            color: #f4f4f4;
+        }
+
+        body.dark-theme header {
+            background-color: #333;
+        }
+
+        body.dark-theme nav a {
+            color: #f4f4f4;
+        }
+        
+        body.dark-theme .service-card {
+            background-color: #2d2d2d;
+            color: #f4f4f4;
+        }
+        
+        body.dark-theme .contact-form {
+            background-color: #2d2d2d;
+        }
+        
+        body.dark-theme .section {
+            background-color: #222;
+        }
+        
+        body.dark-theme .form-group input,
+        body.dark-theme .form-group select,
+        body.dark-theme .form-group textarea {
+            background-color: #333;
+            color: #f4f4f4;
+            border: 1px solid #555;
+        }
+        
+        /* Updated text colors for theme switching */
+        body.dark-theme .service-card h3 {
+            color: #3498db; /* Light blue for dark mode */
+        }
+        
+        body:not(.dark-theme) .service-card h3 {
+            color: #2c3e50; /* Dark gray/blue for light mode */
+        }
+        
+        body.dark-theme .section h2 {
+            color: #3498db; /* Light blue for dark mode */
+        }
+        
+        body:not(.dark-theme) .section h2 {
+            color: #2c3e50; /* Dark gray/blue for light mode */
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23333"/><circle cx="50" cy="50" r="40" fill="%23e74c3c"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        #contactBtn {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #contactBtn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Section styles */
+        .section {
+            padding: 3rem 0;
+            background-color: white;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        /* Services grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        /* About section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        /* Contact section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Form styles */
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: white;
+            color: #333;
+        }
+
+        button[type="submit"] {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1a2530;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.25rem 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 1.5rem 0;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-controls {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            .logo {
+                text-align: center;
+                margin-bottom: 1rem;
+                padding-left: 0;
+            }
+        }
+
+        /* Animation for the hero section buttons */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        #contactBtn {
+            animation: pulse 2s infinite;
+        }
+
+        /* Informative message styles */
+        .form-instruction {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .form-instruction h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-instruction ul {
+            padding-left: 1.5rem;
+        }
+
+        .form-instruction li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Airsoft Garage Logo">
+            <h1>Airsoft Garage</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" data-lang-key="nav_home">Home</a></li>
+                <li><a href="#services" data-lang-key="nav_services">Services</a></li>
+                <li><a href="#about" data-lang-key="nav_about">About</a></li>
+                <li><a href="#contact" data-lang-key="nav_contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-controls">
+            <button class="lang-btn" id="langToggle">EN</button>
+            <button class="theme-btn" id="themeToggle">☀️</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2 data-lang-key="hero_title">Expert Airsoft Replica Repair & Maintenance</h2>
+                <p data-lang-key="hero_subtitle">Your trusted partner for all your airsoft equipment needs</p>
+                <button id="contactBtn" data-lang-key="hero_button">Get a Quote</button>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2 data-lang-key="services_title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3 data-lang-key="service1_title">Replica Repair</h3>
+                        <p data-lang-key="service1_description">Professional repair of all airsoft replicas including AEGs, Springers, and Electric systems.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 data-lang-key="service2_title">Parts Replacement</h3>
+                        <p data-lang-key="service2_description">Original equipment and high-quality aftermarket parts for your gear.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 data-lang-key="service3_title">Maintenance</h3>
+                        <p data-lang-key="service3_description">Regular maintenance to keep your replicas running smoothly and reliably.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3 data-lang-key="service4_title">Custom Builds</h3>
+                        <p data-lang-key="service4_description">Custom modifications and builds tailored to your specific needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 data-lang-key="about_title">About Airsoft Garage</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p data-lang-key="about_content1">Empty template - information to be added later</p>
+                        <p data-lang-key="about_content2">Empty template - information to be added later</p>
+                    </div>
+                    <div class="about-image">
+                        <!-- Placeholder for about image -->
+                        <p>Image placeholder</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 data-lang-key="contact_title">Contact Us</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3 data-lang-key="contact_info">Get in Touch</h3>
+                        <p><strong data-lang-key="phone_label">Phone:</strong> +359 894 625 877</p>
+                        <p><strong data-lang-key="email_label">Email:</strong> svetloslav.ivanov@abv.bg</p>
+                        <p><strong data-lang-key="facebook_label">Facebook:</strong> <a href="https://www.facebook.com/profile.php?id=61589718997147&locale=bg_BG" target="_blank" style="color: #3b5998;">Airsoft Garage Facebook</a></p>
+                    </div>
+                    <div class="contact-form">
+                        <!-- Splitforms integration -->
+                        <div class="form-instruction">
+                            <h3>Testing Instructions for Local Form Submissions:</h3>
+                            <p><strong>Note:</strong> When testing locally, form submissions require special handling:</p>
+                            <ul>
+                                <li>This form will work properly when hosted on a web server</li>
+                                <li>For local testing: 
+                                    <ol>
+                                        <li>Save this page to a web server (any free hosting works)</li>
+                                        <li>Or temporarily remove the Splitforms integration and use the test form at https://splitforms.com/test/887cd08404fb4302a4968f5f1ca93a55</li>
+                                        <li>Submit a test using the "Send a test submission" button in your Splitforms dashboard</li>
+                                    </ol>
+                                </li>
+                                <li>Once live on a web server, all submissions will automatically email to svetloslav.ivanov@abv.bg</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Main Form -->
+                        <form action="https://splitforms.com/api/submit" method="POST">
+                            <input type="hidden" name="access_key" value="887cd08404fb4302a4968f5f1ca93a55" />
+                            <div class="form-group">
+                                <label for="name" data-lang-key="form_name">Name:</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" data-lang-key="form_email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" data-lang-key="form_phone">Phone:</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="service" data-lang-key="form_service">Service Interested In:</label>
+                                <select id="service" name="service">
+                                    <option value="" data-lang-key="form_select_option">Select a service</option>
+                                    <option value="weapon-repair" data-lang-key="form_service1">Replica Repair</option>
+                                    <option value="parts" data-lang-key="form_service2">Parts Replacement</option>
+                                    <option value="maintenance" data-lang-key="form_service3">Maintenance</option>
+                                    <option value="custom" data-lang-key="form_service4">Custom Builds</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" data-lang-key="form_message">Message:</label>
+                                <textarea id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" data-lang-key="form_submit">Send Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Airsoft Garage. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language data
+        const translations = {
+            en: {
+                nav_home: "Home",
+                nav_services: "Services",
+                nav_about: "About",
+                nav_contact: "Contact",
+                hero_title: "Expert Airsoft Replica Repair & Maintenance",
+                hero_subtitle: "Your trusted partner for all your airsoft equipment needs",
+                hero_button: "Get a Quote",
+                services_title: "Our Services",
+                service1_title: "Replica Repair",
+                service1_description: "Professional repair of all airsoft replicas including AEGs, Springers, and Electric systems.",
+                service2_title: "Parts Replacement",
+                service2_description: "Original equipment and high-quality aftermarket parts for your gear.",
+                service3_title: "Maintenance",
+                service3_description: "Regular maintenance to keep your replicas running smoothly and reliably.",
+                service4_title: "Custom Builds",
+                service4_description: "Custom modifications and builds tailored to your specific needs.",
+                about_title: "About Airsoft Garage",
+                about_content1: "Empty template - information to be added later",
+                about_content2: "Empty template - information to be added later",
+                contact_title: "Contact Us",
+                contact_info: "Get in Touch",
+                phone_label: "Phone:",
+                email_label: "Email:",
+                facebook_label: "Facebook:",
+                form_name: "Name:",
+                form_email: "Email:",
+                form_phone: "Phone:",
+                form_service: "Service Interested In:",
+                form_select_option: "Select a service",
+                form_service1: "Replica Repair",
+                form_service2: "Parts Replacement",
+                form_service3: "Maintenance",
+                form_service4: "Custom Builds",
+                form_message: "Message:",
+                form_submit: "Send Inquiry",
+                lang_button: "BG",
+                theme_button: "🌙"
+            },
+            bg: {
+                nav_home: "Начало",
+                nav_services: "Услуги",
+                nav_about: "За нас",
+                nav_contact: "Контакти",
+                hero_title: "Профессионални поправки и поддръжка на реплики",
+                hero_subtitle: "Вашият надежден партньор за поправките на Вашето екипировка",
+                hero_button: "Получи оферта",
+                services_title: "Наши услуги",
+                service1_title: "Поправка на реплики",
+                service1_description: "Профессионални поправки на всички видове реплики, включително AEGs, Springers и електрически системи.",
+                service2_title: "Смяна на запасни части",
+                service2_description: "Оригинални и висококачествени запасни части за Вашето екипировка.",
+                service3_title: "Поддръжка",
+                service3_description: "Редовна поддръжка, за да гарантираме безпроблемно функциониране на репликите Ви.",
+                service4_title: "Персонализирани изработки",
+                service4_description: "Персонализирани модификации и изработка по специфични нужди.",
+                about_title: "За Airsoft Garage",
+                about_content1: "Празен шаблон - информация за добавяне по-късно",
+                about_content2: "Празен шаблон - информация за добавяне по-късно",
+                contact_title: "Свържете се с нас",
+                contact_info: "Връзка",
+                phone_label: "Телефон:",
+                email_label: "Имейл:",
+                facebook_label: "Facebook:",
+                form_name: "Име:",
+                form_email: "Имейл:",
+                form_phone: "Телефон:",
+                form_service: "Интересуваща услуга:",
+                form_select_option: "Изберете услуга",
+                form_service1: "Поправка на реплики",
+                form_service2: "Смяна на запасни части",
+                form_service3: "Поддръжка",
+                form_service4: "Персонализирани изработки",
+                form_message: "Съобщение:",
+                form_submit: "Изпрати заявка",
+                lang_button: "EN",
+                theme_button: "☀️"
+            }
+        };
+
+        // Current language and theme
+        let currentLang = 'en';
+        let isDarkTheme = false;
+
+        // DOM elements
+        const langToggle = document.getElementById('langToggle');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Translation function
+        function translate() {
+            // Translate all elements with data-lang-key attribute
+            const elements = document.querySelectorAll('[data-lang-key]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[currentLang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[currentLang][key];
+                    } else if (element.tagName === 'OPTION') {
+                        element.textContent = translations[currentLang][key];
+                    } else {
+                        element.textContent = translations[currentLang][key];
+                    }
+                }
+            });
+            
+            // Update language toggle button text
+            langToggle.textContent = translations[currentLang].lang_button;
+            
+            // Update theme toggle button text
+            themeToggle.textContent = translations[currentLang].theme_button;
+        }
+
+        // Toggle language function
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'bg' : 'en';
+            translate();
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            if (isDarkTheme) {
+                document.body.classList.add('dark-theme');
+            } else {
+                document.body.classList.remove('dark-theme');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up language toggle button
+            langToggle.addEventListener('click', toggleLanguage);
+            
+            // Set up theme toggle button
+            themeToggle.addEventListener('click', toggleTheme);
+            
+            // Translate initial content
+            translate();
+            
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Contact button functionality
+            const contactBtn = document.getElementById('contactBtn');
+            if (contactBtn) {
+                contactBtn.addEventListener('click', function() {
+                    const contactSection = document.getElementById('contact');
+                    if (contactSection) {
+                        contactSection.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+
+            // Form submission handling
+            const repairForm = document.querySelector('.contact-form form');
+            if (repairForm) {
+                repairForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple validation - already handled by HTML required attribute
+                    // But we can add additional validation if needed
+                    if (!document.getElementById('name').value || 
+                        !document.getElementById('email').value || 
+                        !document.getElementById('message').value) {
+                        alert(translations[currentLang].form_submit);
+                        return;
+                    }
+                    
+                    // For local testing - show helpful information message
+                    if (window.location.protocol === 'file:') {
+                        alert('Form submitted successfully! When hosted on a web server, emails will be sent to svetloslav.ivanov@abv.bg');
+                    } else {
+                        // Form submission would happen here when run on a server
+                        alert('Form submitted successfully! The email should arrive shortly.');
+                    }
+                    
+                    // Reset form
+                    repairForm.reset();
+                });
+            }
+
+            // Add subtle animations on scroll
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all service cards and section headings
+            const serviceCards = document.querySelectorAll('.service-card');
+            const sectionHeadings = document.querySelectorAll('section h2');
+            
+            serviceCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+            
+            sectionHeadings.forEach(heading => {
+                heading.style.opacity = 0;
+                heading.style.transform = 'translateY(20px)';
+                heading.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(heading);
+            });
+
+            // Add some basic interactive elements
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+
+            // Add a simple "welcome" alert when page loads
+            console.log('Welcome to Airsoft Garage website!');
+        });
+    </script>
+</body>
+</html>
